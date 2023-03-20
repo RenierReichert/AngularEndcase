@@ -1,4 +1,6 @@
 <h3>Planned Courses</h3>>
+
+Er moeten hier 2 input velden komen voor jaartal en week en daarop gaan we lekker filteren.
 <table>
 	<thead>
 		<tr>
@@ -15,11 +17,30 @@
 			<td>{{ course.duur }}</td>
 			<td>{{course.code}}</td>
 		</tr>
-        HIER ZOUDEN COURSES MOETEN STAAN
-        {{courses?.length}}
 	</tbody>
 </table>
 
-<h2>EINDE VAN DE COURSESPAGE</h2>
+<h2>EINDE VAN DE COURSESPAGE, hier onder staat de FILTER button om dingen mee stuk te maken</h2>
+
+
+
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Titel</th>
+			<th>Duur</th>
+			<th>StartJaar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let fcourse of filteredlist">
+			<td>{{ fcourse.course.id }}</td>
+			<td>{{ fcourse.course.titel }}</td>
+			<td>{{ fcourse.course.duur }}</td>
+			<td>{{fcourse.instancestartdatum}}</td>
+		</tr>
+	</tbody>
+</table>
 
   <!-- [routerLink]="['edit', course.id]" -->

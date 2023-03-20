@@ -17,3 +17,5 @@ export function createPlannedCourse(overrides?: Partial<PlannedCourse>): Planned
         ...overrides
     }
 }
+
+//TODO add course + startdate combination here as interface

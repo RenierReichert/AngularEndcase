@@ -1,5 +1,6 @@
 <p>courses-page works!</p>
 
 
-<courses-list-viewer [courses]="courseListAll"></courses-list-viewer>
-{{courseListAll.length}}
+<courses-list-viewer [courses]="courses" [filteredlist]="filteredcourses"></courses-list-viewer>
+
+<button (click)="onFilter()">DEFILTER</button>

@@ -1,17 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PlannedCourse, createPlannedCourse } from '../planned-course';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'courses-page',
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.scss']
 })
-export class CoursesPageComponent {
-  courseListAll : PlannedCourse[];
+export class CoursesPageComponent implements OnInit {
+  public courses?: PlannedCourse[];
+  public filteredcourses?: any[];
+
+  constructor(private http: HttpClient) { }
 
 
-
-  constructor() {
-    this.courseListAll = [createPlannedCourse({ id: 100 }), createPlannedCourse({ id: 200 })]; 
+  ngOnInit(): void {
+    this.http.get<PlannedCourse[]>('https://localhost:7177/api/courses')
+      .subscribe((response: PlannedCourse[]) => {
+        this.courses = response;
+      });
   }
+
+  onFilter(): void {
+    this.http.get<any[]>('https://localhost:7177/api/courses/filtered/2020/1')
+      .subscribe((response: any[]) => {
+        this.filteredcourses = response;
+      });
+  }
+  
+
 }
+

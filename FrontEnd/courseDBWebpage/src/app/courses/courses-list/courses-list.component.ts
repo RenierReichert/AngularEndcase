@@ -1,19 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PlannedCourse } from '../planned-course';
 import { createPlannedCourse } from '../planned-course';
 
 @Component({
   selector: 'courses-list-viewer',
   templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss']
+  styleUrls: ['./courses-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesListComponent  {
   @Input()
   public courses?: PlannedCourse[];
-
-  ngOnInit() {
-    //getall() goes here later TODO
-   
-  }
+  @Input()
+  public filteredlist: any;
   
+
 }
