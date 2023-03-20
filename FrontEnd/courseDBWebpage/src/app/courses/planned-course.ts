@@ -13,6 +13,7 @@ export function createPlannedCourse(overrides?: Partial<PlannedCourse>): Planned
         id: -1,
         duur: -1,
         titel: "",
-        code: ""
+        code: "",
+        ...overrides
     }
 }

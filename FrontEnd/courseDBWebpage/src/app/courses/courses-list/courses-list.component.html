@@ -1,16 +1,25 @@
 <h3>Planned Courses</h3>>
-<div class="row">
-    <div class="col">
-      <div class="list-group">
-        <a
-          *ngFor="let course of courses"
-          class="list-group-item"
-        >
-          {{ course.titel }}
-          {{course.code}}
-        </a>
-      </div>
-    </div>
-  </div>
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Titel</th>
+			<th>Duur</th>
+			<th>Code</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let course of courses">
+			<td>{{ course.id }}</td>
+			<td>{{ course.titel }}</td>
+			<td>{{ course.duur }}</td>
+			<td>{{course.code}}</td>
+		</tr>
+        HIER ZOUDEN COURSES MOETEN STAAN
+        {{courses?.length}}
+	</tbody>
+</table>
+
+<h2>EINDE VAN DE COURSESPAGE</h2>
 
   <!-- [routerLink]="['edit', course.id]" -->

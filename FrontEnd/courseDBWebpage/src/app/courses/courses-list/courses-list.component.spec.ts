@@ -21,3 +21,8 @@ describe('CoursesListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+describe('CourseListComponent', () => {
+
+})
