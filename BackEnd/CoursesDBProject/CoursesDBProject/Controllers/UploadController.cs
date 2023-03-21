@@ -32,10 +32,15 @@ public class UploadController : Controller
             Console.WriteLine("FILE CONVERTED TO STRINGS");
             List<CourseInstance> objList =  Parsers.ParseCoursesFromFile(filelines);
             Console.WriteLine("FILE PARSED");
+            if(objList.Count == 0) 
+            {
+                return Ok("This data was already in the database.");
+            }
+
             DBC.CoursesUpload(objList);
             Console.WriteLine("FILE UPLOADED");
 
-            return Ok("File uploaded successfully.");
+            return Ok(new { status = "Everything went well" });
         }
         catch (Exception ex)
         {

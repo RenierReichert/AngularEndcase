@@ -36,7 +36,7 @@ export class UploadPageComponent {
 
     this.http.post('https://localhost:7177/api/upload', formData).subscribe(
       (response) => {
-        console.log('File uploaded successfully.');
+        console.log("Successvol geupload");
       }
     );
   }

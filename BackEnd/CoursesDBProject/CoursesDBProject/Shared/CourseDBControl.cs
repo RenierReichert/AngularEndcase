@@ -19,11 +19,11 @@ namespace CoursesDBProject.Shared
 
             foreach(CourseInstance courseinstance in courses)
             {
-                var existingcourse = _db.CoursesTable.First(c => c.code == courseinstance.course.code);
-                if (existingcourse is not null)
+                int existingcourses = _db.CoursesTable.Where(c => c.code == courseinstance.course.code).Count();
+                if (existingcourses > 0)
                 {
-                    Console.WriteLine(courseinstance.course.code + " Already exists in DB, skipping...");
-                    courseinstance.course = existingcourse;
+                    Console.WriteLine(courseinstance.course.code + "Course Already exists in DB, skipping...");
+                    courseinstance.course = _db.CoursesTable.First(c => c.code == courseinstance.course.code);
                 }
                 else
                 {
@@ -31,12 +31,11 @@ namespace CoursesDBProject.Shared
                     _db.CoursesTable.Add(courseinstance.course);
                 }
 
-                var existinginstance = _db.CourseInstancesTable.First(c => courseinstance.startdatum == c.startdatum && c.course.code == courseinstance.course.code);
+                int existinginstances = _db.CourseInstancesTable.Where(c => courseinstance.startdatum == c.startdatum && c.course.code == courseinstance.course.code).Count();
 
-                if (existinginstance is not null)
+                if (existingcourses > 0)
                 {
-                    Console.WriteLine(existinginstance);
-                    Console.WriteLine(" Already exists in DB, skipping...");
+                    Console.WriteLine("Instance Already exists in DB, skipping...");
                 }
                 else
                 {

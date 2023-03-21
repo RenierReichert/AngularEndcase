@@ -13,40 +13,39 @@ namespace BackendTests
     public class ParserTests
     {
         private static string pathToInputFiles = "D://EINDCASE//AngularEndcase//FrontEnd//courseDBWebpage//inputfiles";
-        private static List<CourseInstance> happyflowExpected;
-        private static List<CourseInstance> errorflowExpected;
-
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
-        {
-            happyflowExpected = new List<CourseInstance>()
+        private static List<CourseInstance> happyflowExpected = new()
             {
                 new CourseInstance()
-                {
-                    course = new Course()
-                    {
-                        titel = "C# Programmeren",
-                        code = "CNETIN",
-                        duur = 5,
+        {
+            course = new Course()
+            {
+                titel = "C# Programmeren",
+                code = "CNETIN",
+                duur = 5,
 
-                    },
+            },
                     startdatum = new DateTime(2018, 10, 8)
 
                 },
                 new CourseInstance()
-                {
-                    course = new Course()
-                    {
-                        titel = "C# Programmeren",
-                        code = "CNETIN",
-                        duur = 5,
+        {
+            course = new Course()
+            {
+                titel = "C# Programmeren",
+                code = "CNETIN",
+                duur = 5,
 
-                    },
+            },
                     startdatum = new DateTime(2018, 10, 15)
 
                 }
-            };
-            List<CourseInstance> errorflowExpected;
+    };
+
+        private static List<CourseInstance> errorflowExpected = new List<CourseInstance>(0);
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext context)
+        {
 
         }
 
@@ -56,9 +55,6 @@ namespace BackendTests
         public void IFormToStringList(string content)
         {
             //Arrange
-            var mockdb = new Mock<InfoSupportDbContext>();
-            string line;
-
             //Setup mock file using a memory stream
             var fileName = "test.txt";
             var stream = new MemoryStream();
@@ -93,13 +89,13 @@ namespace BackendTests
             List<string> input = content.Split("\r\n").ToList();
             List<CourseInstance> expected, actual;
 
-            if(correctinput)
+            if (correctinput)
             {
-                 expected = happyflowExpected;
+                expected = happyflowExpected;
             }
             else
             {
-                 expected = errorflowExpected;
+                expected = errorflowExpected;
             }
 
 
@@ -129,6 +125,7 @@ namespace BackendTests
                     Assert.AreEqual(expected[i].startdatum, actual[i].startdatum);
                 }
                 */
+
                 for (var i = 0; i < expected.Count; i++)
                 {
                     var object1Json = JsonConvert.SerializeObject(expected[i]);
@@ -137,7 +134,6 @@ namespace BackendTests
                     Assert.AreEqual(object1Json, object2Json);
                 }
             }
-
         }
     }
 }
