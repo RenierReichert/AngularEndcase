@@ -19,31 +19,6 @@ public class CourseController : Controller
     }
 
 
-    //TO TEST NOW:
-    //TODO: REPLACE THIS WITH DB GET
-    /*
-    private static List<Course> courses = new List<Course>()
-    {
-        new Course()
-        {
-            Id = 5,
-            duur =  3,
-            titel = "HALLOVANUITDEBACKEND NIET DE DB",
-            code = "CONTROLLER.CS"
-
-        },
-        new Course()
-        {
-            Id = 6,
-            duur =  2,
-            titel = "HALLOVANUITDEBACKEND NIET DE DB",
-            code = "course 2"
-
-        }
-    };
-    */
-
-
     [HttpGet]
     public IEnumerable<Course> GetAll()
     {
@@ -71,9 +46,6 @@ public class CourseController : Controller
 
         Console.WriteLine(coursesInRange);
         return coursesInRange;
-
-
-
     }
 
     /*

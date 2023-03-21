@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlannedCourse, createPlannedCourse } from '../planned-course';
 import { HttpClient } from '@angular/common/http';
+import { CourseInstance } from '../course-instance';
 
 @Component({
   selector: 'courses-page',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CoursesPageComponent implements OnInit {
   public courses?: PlannedCourse[];
-  public filteredcourses?: any[];
+  public filteredcourses?: CourseInstance[];
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +24,7 @@ export class CoursesPageComponent implements OnInit {
 
   onFilter(): void {
     this.http.get<any[]>('https://localhost:7177/api/courses/filtered/2020/1')
-      .subscribe((response: any[]) => {
+      .subscribe((response: CourseInstance[]) => {
         this.filteredcourses = response;
       });
   }

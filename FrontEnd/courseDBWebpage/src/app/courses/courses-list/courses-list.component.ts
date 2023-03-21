@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PlannedCourse } from '../planned-course';
 import { createPlannedCourse } from '../planned-course';
+import { CourseInstance } from '../course-instance';
 
 @Component({
   selector: 'courses-list-viewer',
@@ -12,7 +13,7 @@ export class CoursesListComponent  {
   @Input()
   public courses?: PlannedCourse[];
   @Input()
-  public filteredlist: any;
+  public filteredlist?: CourseInstance[];
   
 
 }

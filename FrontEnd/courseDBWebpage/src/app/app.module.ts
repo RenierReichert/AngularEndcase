@@ -8,12 +8,14 @@ import { CoursesListComponent } from './courses/courses-list/courses-list.compon
 import { routes } from './routes';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { UploadPageComponent } from './upload-page/upload-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesListComponent,
-    CoursesPageComponent
+    CoursesPageComponent,
+    UploadPageComponent
   ],
   imports: [
     BrowserModule,
