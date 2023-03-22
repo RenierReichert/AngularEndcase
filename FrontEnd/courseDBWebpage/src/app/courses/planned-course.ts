@@ -1,12 +1,4 @@
-export interface PlannedCourse {
-    id: number;
-
-    duur: number;
-
-    titel: string;
-
-    code: string;
-}
+import { PlannedCourse } from "../DTOs/CourseObjs"
 
 export function createPlannedCourse(overrides?: Partial<PlannedCourse>): PlannedCourse{
     return {
@@ -17,5 +9,3 @@ export function createPlannedCourse(overrides?: Partial<PlannedCourse>): Planned
         ...overrides
     }
 }
-
-//TODO add course + startdate combination here as interface

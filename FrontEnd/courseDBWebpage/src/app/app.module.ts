@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { routes } from './routes';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { UploadPageComponent } from './upload-page/upload-page.component';
+import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,13 @@ import { UploadPageComponent } from './upload-page/upload-page.component';
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

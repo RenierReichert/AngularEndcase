@@ -23,30 +23,43 @@ public class UploadController : Controller
     public async Task<IActionResult> UploadFile()
     {
         Console.WriteLine("FILE RECIEVED IN BACKEND");
+        List<CourseInstance> objList;
 
+        #region RecieveAndParse
         try
         {
             var file = Request.Form.Files[0];
 
             List<string> filelines = Parsers.ReadAsList(file);
             Console.WriteLine("FILE CONVERTED TO STRINGS");
-            List<CourseInstance> objList =  Parsers.ParseCoursesFromFile(filelines);
+            objList =  Parsers.ParseCoursesFromFile(filelines);
             Console.WriteLine("FILE PARSED");
             if(objList.Count == 0) 
             {
                 return Ok("This data was already in the database.");
             }
-
-            DBC.CoursesUpload(objList);
-            Console.WriteLine("FILE UPLOADED");
-
-            return Ok(new { status = "Everything went well" });
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error uploading file: {ex.Message}");
             return StatusCode(500, $"Error uploading file: {ex.Message}");
         }
+        #endregion
+
+        #region DBUpload
+        try
+        {
+            DBC.CoursesUpload(objList);
+            Console.WriteLine("FILE UPLOADED");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error uploading file: {ex.Message}");
+            return StatusCode(500, $"Oopsie Whoopsie, our DataBase Brokey Wokey. Our coding boys will quickly help you fix this :) Contact your system admin.");
+        }
+        #endregion
+        return Ok(new { status = "Everything went well" });
+      
     }
 
 

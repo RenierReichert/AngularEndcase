@@ -13,7 +13,7 @@ namespace BackendTests
     public class ParserTests
     {
         private static string pathToInputFiles = "D://EINDCASE//AngularEndcase//FrontEnd//courseDBWebpage//inputfiles";
-        private static List<CourseInstance> happyflowExpected = new()
+        public static List<CourseInstance> happyflowExpected = new()
             {
                 new CourseInstance()
         {
@@ -41,13 +41,8 @@ namespace BackendTests
                 }
     };
 
-        private static List<CourseInstance> errorflowExpected = new List<CourseInstance>(0);
+        public static List<CourseInstance> errorflowExpected = new List<CourseInstance>(0);
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
-        {
-
-        }
 
         [DataRow("Titel: C# Programmeren\r\nCursuscode: CNETIN\r\nDuur: 5 dagen\r\nStartdatum: 8/10/2018\r\n\r\nTitel: C# Programmeren\r\nCursuscode: CNETIN\r\nDuur: 5 dagen\r\nStartdatum: 15/10/2018\r\n\r\nTitel: Java Persistence API\r\nCursuscode: JPA\r\nDuur: 2 dagen\r\nStartdatum: 15/10/2018\r\n\r\nTitel: Java Persistence API\r\nCursuscode: JPA\r\nDuur: 2 dagen\r\nStartdatum: 8/10/2018\r\n\r\nTitel: C# Programmeren\r\nCursuscode: CNETIN\r\nDuur: 5 dagen\r\nStartdatum: 8/10/2018")]
         [DataRow("Titel: C# Programmeren\r\nDuur: 5 dagen\r\nCursuscode: CNETIN\r\nStartdatum: 8/10/2018")]

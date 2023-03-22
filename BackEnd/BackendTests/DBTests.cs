@@ -7,77 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
+using CoursesDBProject.Tables;
 
 namespace BackendTests
 {
     [TestClass]
     public class DBTests
     {
-    }
-    /*
-    [DataRow("Titel: C# Programmeren\r\nCursuscode: CNETIN\r\nDuur: 5 dagen\r\nStartdatum: 8/10/2018\r\n\r\nTitel: C# Programmeren\r\nCursuscode: CNETIN\r\nDuur: 5 dagen\r\nStartdatum: 15/10/2018", true)]
-    [DataRow("Titel: C# Programmeren\r\nDuur: 5 dagen\r\nCursuscode: CNETIN\r\nStartdatum: 8/10/2018", false)]
-    [TestMethod]
-    public void AcceptCorrectUploadsAndRejectIncorrectOnes(string content, bool correctinput)
-    {
-        //Arrange
-        List<string> input = content.Split("\r\n").ToList();
-        List<CourseInstance> expected, actual;
-
-        if (correctinput)
-        {
-            expected = happyflowExpected;
-        }
-        else
-        {
-            expected = errorflowExpected;
-        }
 
 
-        //act and assert
-        if (!correctinput)
+        [DataRow(true)]
+        [DataRow(false)]
+        [TestMethod]
+        public void RejectIncorrectUploads(bool correctinput)
         {
-            try
-            {
-                actual = Parsers.ParseCoursesFromFile(input);
-                Assert.Fail();
-            }
-            catch
-            {
-                Assert.IsTrue(true);
-            }
-        }
-        else
-        {
-            actual = Parsers.ParseCoursesFromFile(input);
-            Assert.AreEqual(expected.Count, actual.Count);
-
-            //Tojson for better checking?
-            /*
-            for (var i = 0; i < expected.Count; i++)
-            {
-                Assert.AreEqual(expected[i].course, actual[i].course);
-                Assert.AreEqual(expected[i].startdatum, actual[i].startdatum);
-            }
             
-
-            for (var i = 0; i < expected.Count; i++)
+            //Arrange
+            List<CourseInstance> expected, actual;
+            if (correctinput)
             {
-                var object1Json = JsonConvert.SerializeObject(expected[i]);
-                var object2Json = JsonConvert.SerializeObject(actual[i]);
-
-                Assert.AreEqual(object1Json, object2Json);
+                expected = ParserTests.happyflowExpected;
             }
+            else
+            {
+                expected = ParserTests.errorflowExpected;
+            }
+          //  var mockdb = new Mock<InfoSupportDbContext>();
+          //  var dbControl = new CourseDBControl(mockdb.Object);
+
+            //act and assert
+            
         }
     }
-
-    [DataRow("Titel: C# Programmeren\r\nCursuscode: CNETIN\r\nDuur: 5 dagen\r\nStartdatum: 8/10/2018\r\n\r\nTitel: C# Programmeren\r\nCursuscode: CNETIN\r\nDuur: 5 dagen\r\nStartdatum: 15/10/2018", true)]
-    [DataRow("Titel: C# Programmeren\r\nDuur: 5 dagen\r\nCursuscode: CNETIN\r\nStartdatum: 8/10/2018", false)]
-    [TestMethod]
-    public void DuplicatesShouldntBeAddedToDB(string content, bool correctinput)
-    {
-
-
-    }
-    */
+    
 }

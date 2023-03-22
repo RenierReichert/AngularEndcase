@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlannedCourse, createPlannedCourse } from '../planned-course';
+import { PlannedCourse } from 'src/app/DTOs/CourseObjs';
 import { HttpClient } from '@angular/common/http';
 import { CourseInstance } from '../course-instance';
 

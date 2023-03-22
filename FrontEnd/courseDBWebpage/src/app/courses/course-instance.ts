@@ -1,4 +1,4 @@
-import { PlannedCourse } from "./planned-course";
+import { PlannedCourse } from "../DTOs/CourseObjs";
 
 export interface CourseInstance {
     course: PlannedCourse;
