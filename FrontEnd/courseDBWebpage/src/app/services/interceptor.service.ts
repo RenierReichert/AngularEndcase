@@ -13,13 +13,22 @@ export class InterceptorService {
 
   constructor() { }
 
-  setErrorMessage(message: string) {
+  setErrorMessage(message: any) {
+    if(typeof message === "string")
+    {    
     this.errorMessage.next(message);
-    console.log("ERroRRMESSAGE SET");
+    }
+    else
+    {
+      this.errorMessage.next("Server appears to be offline.");      
+    }
+    console.log(message);
+    
+  //  console.log("ERRORRMESSAGE SET");
   }
 
   getErrorMessageSubject() {
-    console.log("ERroRMESSAGE GET");
+   // console.log("ERRORMESSAGE GET");
     return this.errorMessage.asObservable();
   }
 

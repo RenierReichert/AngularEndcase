@@ -1,7 +1,10 @@
 import { CourseInstance } from "../courses/course-instance";
+import { PlannedCourse } from "./CourseObjs";
 
 export interface CourseDBChanges{
     message: string;
     
-    changeList: CourseInstance[];
+    cichangeList: CourseInstance[];
+
+    pcchangeList: PlannedCourse[];
 }

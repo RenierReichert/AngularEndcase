@@ -36,7 +36,7 @@ public class CourseController : Controller
         Console.WriteLine(route);
 
         DateTime startdatum = new DateTime(year, 1, 1);
-        DateTime enddatum = new DateTime(2025, 3, 31);
+        DateTime enddatum = startdatum.AddDays(7); ;
 
 
         var coursesInRange = from c in _db.CoursesTable

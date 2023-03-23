@@ -13,11 +13,13 @@ export class ErrorInterceptor implements HttpInterceptor {
   {
 
   }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     return next.handle(req).pipe(      
       catchError((error: any) => {
         if( !(error instanceof HttpErrorResponse))
         {
+          console.log("CORRECT REPLY");
           return next.handle(req);
         }
         else
@@ -27,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         } else if (error.status >= 500) {
           console.error('Interceptor zegt: Server error occurred:', error.error); 
         }
-        let errorMessage: string = error.statusText;
+        let errorMessage: string = error.error;
         this.intService.setErrorMessage(errorMessage);
         return throwError(() => error);
       }

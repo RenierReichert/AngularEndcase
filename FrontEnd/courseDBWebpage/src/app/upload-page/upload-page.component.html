@@ -1,3 +1,18 @@
 
-<input type="file" #fileInput (change)="onFileSelected()">
-{{uploadStatus}}
+<input type="file" #fileInput (change)="onFileSelected()"> 
+<p>{{uploadStatus}}</p>
+
+<header>{{ciHeader}}</header>
+<pre>
+    <p>
+{{cichangelist | json}}
+    </p>
+</pre>
+
+<header>{{cHeader}}</header>
+<pre>
+    <p>
+{{cchangelist | json}}
+    </p>
+</pre>
+

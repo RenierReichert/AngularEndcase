@@ -14,7 +14,5 @@ namespace CoursesDBProject.Entities
 
         [MaxLength(10)]
         public string code { get; set; }
-
-        public List<CourseInstance>? courses { get; set; }
     }
 }

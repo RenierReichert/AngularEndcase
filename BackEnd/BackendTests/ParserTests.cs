@@ -13,6 +13,7 @@ namespace BackendTests
     public class ParserTests
     {
         private static string pathToInputFiles = "D://EINDCASE//AngularEndcase//FrontEnd//courseDBWebpage//inputfiles";
+
         public static List<CourseInstance> happyflowExpected = new()
             {
                 new CourseInstance()

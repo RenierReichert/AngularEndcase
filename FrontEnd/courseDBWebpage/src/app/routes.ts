@@ -4,6 +4,6 @@ import { UploadPageComponent } from "./upload-page/upload-page.component";
 
 export const routes: Route[] = [
     {path: 'courses', component: CoursesPageComponent},
-    {path: 'upload', component: UploadPageComponent}
+    {path: 'upload', component: UploadPageComponent},
 
 ];
