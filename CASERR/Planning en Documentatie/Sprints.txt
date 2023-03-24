@@ -1,0 +1,14 @@
+Dag 1: Maak walking skeleton. Architectuur voor frontend, backend en DB.
+
+Dag 1: backlog: Vrijwel alles af.
+
+Dag 2: Feedback naar frontend. File transfer afmaken. Parsing voor files maken.
+
+Dag 2: backlog: Testing moet beter implemented. HTTP errors afhandelen.
+
+Dag 3: Tests maken. obj. lijst naar frontend kunnen sturen. Bettere communicatie tussen systemen.
+
+Dag 3: Backlog: Vrijwel alles af. Meer tests nog nodig en lijst word nog niet door frontend displayed.
+
+Dag 4: Meer tests maken. Line-nummer van incorrected input naar frontend.
+HTTP Interceptor verbeteren. Betere error handling. 
