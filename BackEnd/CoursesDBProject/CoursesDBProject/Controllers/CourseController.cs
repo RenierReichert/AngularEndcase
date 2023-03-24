@@ -50,7 +50,32 @@ public class CourseController : Controller
                              select new { Course = c, instancestartdatum = i.startdatum };
 
         Console.WriteLine(coursesInRange);
-        return coursesInRange.ToList();
+        var resultlist = coursesInRange.ToList();
+
+        //Create a fake course in case we didn't find any results at all.
+        //This lets the user know why there are 0 results.
+        //Giving a fake entity back with a message
+        //avoids triggering the HTTPErrorInterceptor in the frontend.
+        if (resultlist.Count() == 0)
+        {
+            
+            var crs = new Course();
+            crs.Id = 0;
+            crs.duur = 0;
+            crs.titel = $"Geen resultaten gevonden voor jaar {year} in week {week}";
+            crs.code = "Foutcode";
+
+            var d = new DateTime();
+
+            var tcrs = new {
+                Course = crs,
+                instancestartdatum = d                
+            };
+            
+            resultlist.Add(tcrs);
+        }
+
+        return resultlist;
     }
 
     /*
