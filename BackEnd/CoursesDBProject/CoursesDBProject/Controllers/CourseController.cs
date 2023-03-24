@@ -35,17 +35,22 @@ public class CourseController : Controller
         var route = Request.Path.Value;
         Console.WriteLine(route);
 
-        DateTime startdatum = new DateTime(year, 1, 1);
-        DateTime enddatum = startdatum.AddDays(7); ;
+        DateTime startdate = new DateTime(year, 1, 1).AddDays((week - 1) * 7);
+        while (startdate.DayOfWeek != DayOfWeek.Monday)
+        {
+            // Is this the best way? I guess it works
+            startdate = startdate.AddDays(-1);
+        }
+        DateTime enddate = startdate.AddDays(7);
 
 
         var coursesInRange = from c in _db.CoursesTable
                              join i in _db.CourseInstancesTable on c.Id equals i.course.Id
-                             where i.startdatum.Year >= year && i.startdatum.Year <= (year+5)
+                             where i.startdatum >= startdate && i.startdatum <= enddate
                              select new { Course = c, instancestartdatum = i.startdatum };
 
         Console.WriteLine(coursesInRange);
-        return coursesInRange;
+        return coursesInRange.ToList();
     }
 
     /*

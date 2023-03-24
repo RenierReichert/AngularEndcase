@@ -5,6 +5,7 @@ namespace CoursesDBProject.Entities
 {
     public class Course
     {
+        [Key]
         public int Id { get; set; }
 
         public int duur { get; set; }

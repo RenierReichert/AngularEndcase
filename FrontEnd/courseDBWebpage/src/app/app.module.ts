@@ -10,6 +10,8 @@ import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { UploadPageComponent } from './upload-page/upload-page.component';
 import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {
@@ -29,6 +33,7 @@ import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
       useClass: ErrorInterceptor,
       multi: true,
     },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

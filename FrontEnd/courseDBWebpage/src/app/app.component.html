@@ -1,13 +1,14 @@
 <header>
-	<h1>ADMINISTRATION APP</h1>
+	<h1>Angular walking skeleton</h1>
 	<nav>
 		<ol>
-			<li><a routerLink="/courses" routerLinkActive="active">PLANNED COURSES</a></li>
+			<li><a routerLink="/coursesbyweek" routerLinkActive="active">This week's courses</a></li>
 			<li><a routerLink="/upload" routerLinkActive="active">Upload page</a></li>
+			<li><a routerLink="/coursesoverview" routerLinkActive="active">All Courses</a> </li>
 		</ol>
 	</nav>
 </header>
 
 <router-outlet></router-outlet>
 
-<p>{{ errorMessage }}</p>
+<h2>{{ errorMessage }}</h2>

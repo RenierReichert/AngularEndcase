@@ -19,5 +19,12 @@ namespace CoursesDBProject.Tables
             this._dbPath= folder;
             Console.WriteLine(folder);
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Course>()
+                .HasIndex(u => u.code)
+                .IsUnique();
+        }
     }
 }

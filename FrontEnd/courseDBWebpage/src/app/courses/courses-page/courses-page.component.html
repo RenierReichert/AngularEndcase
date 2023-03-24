@@ -1,4 +1,42 @@
-<courses-list-viewer [courses]="courses" [filteredlist]="filteredcourses"></courses-list-viewer>
+<form [formGroup]="weekForm" (submit)="onFilter()">
+    <div class="form-group">
+      <label for="year">Year:</label>
+      <input type="number" name="year" min="2000" max="2030" required
+        formControlName="year" value="year">
+        
+        <div class="input-group">
+            <label for="week">Week:</label><br/>
+            <button type="button" class="btn btn-secondary" (click)="decrementWeek()">
+              <i class="fa fa-minus">-1 week</i> 
+            </button>
+            
+            <input type="number" name="week" min="0" max="54" required
+                   formControlName="week" value="week">
+            <button type="button" class="btn btn-secondary" (click)="incrementWeek()">
+              <i class="fa fa-plus">+1 week</i>
+            </button>
+          </div>
+    </div>
+    <button type="submit">Zoek</button>
+  </form>
 
-<button (click)="onFilter()">DEFILTER</button>
+(Goedvoorbeeld1.txt is 2018 week 42)
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Titel</th>
+			<th>Duur</th>
+			<th>StartDatum</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let fcourse of sortedlist">
+			<td>{{ fcourse.course.id }}</td>
+			<td>{{ fcourse.course.titel }}</td>
+			<td>{{ fcourse.course.duur }}</td>
+			<td>{{ fcourse.instancestartdatum | date }}</td>
+		</tr>
+	</tbody>
+</table>
 

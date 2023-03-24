@@ -3,35 +3,27 @@ import { PlannedCourse } from 'src/app/DTOs/CourseObjs';
 import { createPlannedCourse } from '../planned-course';
 import { CourseInstance } from '../course-instance';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'courses-list-viewer',
   templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./courses-list.component.scss']
 })
-export class CoursesListComponent  {
+export class CoursesListComponent implements OnInit {
   @Input()
   public courses?: PlannedCourse[];
-  @Input()
-  public filteredlist?: CourseInstance[] = [];
 
-  get sortedlist(): CourseInstance[]{
+  constructor(private http: HttpClient)
+  {
 
-    //If the list is empty, don't try to sort it
-    if(!this.filteredlist)
-    {
-      return [];
-    }
+  }
 
-    let sortedlist: CourseInstance[];
-    sortedlist = this.filteredlist!.sort(
-      (a,b) => {
-        return <any>new Date(a.instancestartdatum) - <any>new Date(b.instancestartdatum);
-      }
-    );
-
-    return sortedlist;
+  ngOnInit(): void {
+    this.http.get<PlannedCourse[]>('https://localhost:7177/api/courses')
+      .subscribe((response: PlannedCourse[]) => {
+        this.courses = response;
+      });
   }
   
 

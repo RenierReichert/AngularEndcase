@@ -1,6 +1,7 @@
 ﻿using CoursesDBProject.Tables;
 using CoursesDBProject.Entities;
 using CoursesDBProject.DTOs;
+using CoursesDBProject.Migrations;
 
 namespace CoursesDBProject.Shared
 {
@@ -21,11 +22,10 @@ namespace CoursesDBProject.Shared
             int courseinstancesaddedcount = 0, courseinstancesskipped = 0;
             string msg;
 
-
+            #region uploadcourse
             foreach (CourseInstance courseinstance in courses)
             {
-
-                #region uploadcourse
+                
                 int existingcourses = _db.CoursesTable.Where(c => c.code == courseinstance.course.code).Count();
 
                 // Check the DB if this entity already exists.
@@ -42,15 +42,29 @@ namespace CoursesDBProject.Shared
                 {
                     Console.WriteLine(courseinstance.course.code + "Course Already exists in DB, skipping...");
                     coursesskipped++;
-                }
-                #endregion
+                }              
 
-                #region uploadcourseinstance
+            }
+            #endregion
+
+            // This needs to be split up in 2 transactions
+            // First courses, then instances linked to it, otherwise EFCore will add duplicate courses anyway to create FKs for courseinstances.
+
+            _db.SaveChanges();
+
+            #region uploadcourseinstance
+            foreach (CourseInstance courseinstance in courses)
+            {                
                 int existinginstances = _db.CourseInstancesTable.Where(c => courseinstance.startdatum == c.startdatum && c.course.code == courseinstance.course.code).Count();
 
-                if (existingcourses == 0 && !addedCourseInstances.Any(c => c.Equals(courseinstance)))
+                if (existinginstances == 0 && !addedCourseInstances.Any(c => c.Equals(courseinstance)))
                 {
                     Console.WriteLine("Adding courseInstance to DB...");
+
+                    //Check if we need to link this instance to an existing course:
+                    var existingcourse = LinkToDataEntry(courseinstance, addedCourses);
+                    courseinstance.course = existingcourse ?? courseinstance.course;
+
                     _db.CourseInstancesTable.Add(courseinstance);
                     courseinstancesaddedcount++;
                     addedCourseInstances.Add(courseinstance);
@@ -59,11 +73,9 @@ namespace CoursesDBProject.Shared
                 {
                     Console.WriteLine("Instance Already exists in DB, skipping...");
                     courseinstancesskipped++;
-                }
-                #endregion
-
+                }                         
             }
-
+            #endregion
             _db.SaveChanges();
 
             msg = $"{coursesaddedcount} courses were added to the database. " +
@@ -82,5 +94,12 @@ namespace CoursesDBProject.Shared
         }
 
 
+        private Course? LinkToDataEntry(CourseInstance courseInstance, List<Course> addedCourses)
+        {
+            var tmp = new Course();
+            tmp = _db.CoursesTable.FirstOrDefault(c => c.code == courseInstance.course.code) ?? addedCourses.FirstOrDefault(c => c.code == courseInstance.course.code);
+            return tmp;
+
+        }
     }
 }

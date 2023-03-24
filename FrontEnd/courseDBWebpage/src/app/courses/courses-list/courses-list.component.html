@@ -1,4 +1,4 @@
-<h3>Planned Courses overview</h3>>
+<h3>Planned Courses overview</h3>
 
 <table>
 	<thead>
@@ -19,25 +19,5 @@
 	</tbody>
 </table>
 
-Er moeten hier 2 input velden komen voor jaartal en week en daarop gaan we lekker filteren.
-
-<table>
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Titel</th>
-			<th>Duur</th>
-			<th>StartJaar</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let fcourse of sortedlist">
-			<td>{{ fcourse.course.id }}</td>
-			<td>{{ fcourse.course.titel }}</td>
-			<td>{{ fcourse.course.duur }}</td>
-			<td>{{ fcourse.instancestartdatum | date }}</td>
-		</tr>
-	</tbody>
-</table>
 
   <!-- [routerLink]="['edit', course.id]" -->

@@ -1,18 +1,20 @@
-
-<input type="file" #fileInput (change)="onFileSelected()"> 
-<p>{{uploadStatus}}</p>
-
-<header>{{ciHeader}}</header>
-<pre>
-    <p>
-{{cichangelist | json}}
-    </p>
-</pre>
-
-<header>{{cHeader}}</header>
-<pre>
-    <p>
-{{cchangelist | json}}
-    </p>
-</pre>
-
+<div class="container">
+    <label for="fileInput">Upload een .txt bestand met geplande Courses.</label>
+    <input id="fileInput" type="file" #fileInput (change)="onFileSelected()"> 
+    <p class="upload-status">{{uploadStatus}}</p>
+  
+    <div class="change-list">
+      <header class="header">{{ciHeader}}</header>
+      <pre>
+        <p>{{cichangelist | json}}</p>
+      </pre>
+    </div>
+  
+    <div class="change-list">
+      <header class="header">{{cHeader}}</header>
+      <pre>
+        <p>{{cchangelist | json}}</p>
+      </pre>
+    </div>
+  </div>
+  

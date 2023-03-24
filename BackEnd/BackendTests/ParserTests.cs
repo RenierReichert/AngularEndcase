@@ -4,8 +4,10 @@ using CoursesDBProject.Shared;
 using CoursesDBProject.Tables;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace BackendTests
 {
@@ -130,6 +132,39 @@ namespace BackendTests
                     Assert.AreEqual(object1Json, object2Json);
                 }
             }
+        }
+
+        [DataRow("assets/fout1.txt", "Something went wrong on. Exception on line: 0 of the inputfile.\n")]
+        [DataRow("assets/fout2.txt", "Something went wrong on. Exception on line: 0 of the inputfile.\n")]
+        [DataRow("assets/fout3.txt", "Something went wrong on. Exception on line: 3 of the inputfile.\n")]
+        [DataRow("assets/fout4.txt", "Something went wrong on. Exception on line: 0 of the inputfile.\n")]
+        [DataRow("assets/fout5.txt", "Something went wrong on. Exception on line: 5 of the inputfile.\n")]
+        [TestMethod]
+        public void GiveExceptionLinesCorrectly(string content, string expected)
+        {
+            //Arrange
+            List<string> lines = new List<string>();
+
+            using (StreamReader reader = new StreamReader("D:\\EINDCASE\\AngularEndcase\\BackEnd\\BackendTests\\" + content))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lines.Add(line);
+                }
+            }
+
+            //Act            
+            try
+            {
+                var actual = Parsers.ParseCoursesFromFile(lines);
+                Assert.Fail();
+            }
+            catch(Parsers.MyException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
+            
         }
     }
 }
